@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: backoffice
+  name: backoffice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: backoffice
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: backoffice
+    spec:
+      containers:
+        - args:
+            - --verbose
+            - --global-response-templating
+            - --max-template-cache-entries
+            - "0"
+          image: wiremock/wiremock:3.6.0
+          name: backoffice
+          ports:
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - mountPath: /home/wiremock
+              name: backoffice-claim0
+      restartPolicy: Always
+      volumes:
+        - name: backoffice-claim0
+          persistentVolumeClaim:
+            claimName: backoffice-claim0
+status: {}

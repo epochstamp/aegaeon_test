@@ -1,0 +1,18 @@
+{
+   "name": "catchall",
+   "request": {
+      "method": "GET",
+      "urlPattern": ".*",
+      "basicAuth": {
+         "username": "test",
+         "password": "test"
+     }
+   },
+   "response": {
+      "body": "I'm backoffice",
+      "headers": {
+         "Content-Type": "application/json;charset=UTF-8"
+      },
+      "status": 200
+   }
+}

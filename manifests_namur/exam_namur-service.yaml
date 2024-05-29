@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: exam-namur
+  name: exam_namur
+spec:
+  ports:
+    - name: "9092"
+      port: 9092
+      targetPort: 8080
+  selector:
+    io.kompose.service: exam-namur
+status:
+  loadBalancer: {}
