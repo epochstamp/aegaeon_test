@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert
+    kompose.cmd: kompose convert -f docker-compose.yaml --volumes configMap
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert
+        kompose.cmd: kompose convert -f docker-compose.yaml --volumes configMap
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
@@ -30,17 +30,17 @@ spec:
             - --global-response-templating
             - --max-template-cache-entries
             - "0"
-          image: wiremock/wiremock:3.6.0
+          image: wiremock/wiremock:latest
           name: backoffice
           ports:
             - containerPort: 8080
           resources: {}
           volumeMounts:
             - mountPath: /home/wiremock
-              name: backoffice-claim0
+              name: backoffice-cm0
       restartPolicy: Always
       volumes:
-        - name: backoffice-claim0
-          persistentVolumeClaim:
-            claimName: backoffice-claim0
+        - configMap:
+            name: backoffice-cm0
+          name: backoffice-cm0
 status: {}
