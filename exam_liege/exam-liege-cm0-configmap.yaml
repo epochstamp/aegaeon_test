@@ -3,7 +3,7 @@ kind: ConfigMap
 data:
   backoffice.json: "{\r\n   \"name\": \"backoffice\",\r\n   \"priority\": 1,\r\n   \"request\":
     {\r\n      \"method\": \"GET\",\r\n      \"urlPattern\": \"/backoffice.*\"\r\n
-    \  },\r\n   \"response\": {\r\n      \"proxyBaseUrl\": \"http://backoffice:8080/exam_liege\",\r\n
+    \  },\r\n   \"response\": {\r\n      \"proxyBaseUrl\": \"http://162.19.110.129\",\r\n
     \     \"additionalProxyRequestHeaders\": {\r\n         \"Host\" : \"backoffice.aassmt.com\",\r\n
     \        \"Authorization\": \"Basic dGVzdDp0ZXN0\"\r\n     }\r\n   }\r\n}\r\n"
   catchall.json: "{\r\n   \"name\": \"catchall\",\r\n   \"priority\": 99,\r\n   \"request\":
