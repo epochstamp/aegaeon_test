@@ -15,6 +15,4 @@ spec:
       targetPort: 8080
   selector:
     io.kompose.service: exam-liege
-  type: LoadBalancer
-status:
-  loadBalancer: {}
+  type: NodePort
