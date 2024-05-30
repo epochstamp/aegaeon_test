@@ -41,6 +41,6 @@ spec:
       restartPolicy: Always
       volumes:
         - hostPath:
-            path: https://github.com/epochstamp/aegaeon_test/tree/main/backoffice/
+            path: ./
           name: backoffice-hostpath0
 status: {}
