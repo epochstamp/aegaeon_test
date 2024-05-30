@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment
 metadata:
   annotations:
@@ -30,7 +30,7 @@ spec:
             - --global-response-templating
             - --max-template-cache-entries
             - "0"
-          image: wiremock/wiremock:latest
+          image: wiremock/wiremock:3.6.0
           name: backoffice
           ports:
             - containerPort: 8080
@@ -41,6 +41,6 @@ spec:
       restartPolicy: Always
       volumes:
         - hostPath:
-            path: ./
+            path: ./backoffice
           name: backoffice-hostpath0
 status: {}
