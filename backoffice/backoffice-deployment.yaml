@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert --volumes configMap
+    kompose.cmd: kompose convert --volumes hostPath
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert --volumes configMap
+        kompose.cmd: kompose convert --volumes hostPath
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
@@ -36,13 +36,11 @@ spec:
             - containerPort: 8080
           resources: {}
           volumeMounts:
-            - mountPath: /home/wiremock/__files
-              name: backoffice-data
-            - mountPath: /home/wiremock/mappings
-              name: backoffice-data
+            - mountPath: /home/wiremock
+              name: backoffice-hostpath0
       restartPolicy: Always
       volumes:
-        - configMap:
-            name: backoffice-data
-          name: backoffice-data
+        - hostPath:
+            path: https://github.com/epochstamp/aegaeon_test/tree/main/backoffice/
+          name: backoffice-hostpath0
 status: {}
