@@ -36,7 +36,7 @@ spec:
             - containerPort: 8080
           resources: {}
           volumeMounts:
-            - mountPath: /home/wiremock
+            - mountPath: /home/wiremock:z
               name: backoffice-hostpath0
       restartPolicy: Always
       volumes:
