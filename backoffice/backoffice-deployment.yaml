@@ -43,7 +43,7 @@ spec:
               name: wiremock-mappings
       restartPolicy: Always
       volumes:
-        - configMap:
+        - name: wiremock-mappings
+          configMap:
             name: backoffice-cm0
-          name: wiremock-mappings
 status: {}
