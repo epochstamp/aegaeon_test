@@ -1,66 +1,56 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert --volumes hostPath
-    kompose.version: 1.26.0 (40646f47)
-  creationTimestamp: null
-  labels:
-    io.kompose.service: backoffice
   name: backoffice
+  labels:
+    type: wiremock
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: backoffice
-  strategy:
-    type: Recreate
+      type: wiremock
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert --volumes hostPath
-        kompose.version: 1.26.0 (40646f47)
-      creationTimestamp: null
       labels:
-        io.kompose.service: backoffice
+        type: wiremock         
     spec:
       containers:
-        - args:
-            - --verbose
-            - --global-response-templating
-            - --max-template-cache-entries
-            - "0"
-          image: wiremock/wiremock:3.6.0
-          name: backoffice
-          ports:
-            - containerPort: 8080
-          resources: {}
-          volumeMounts:
-            - mountPath: /home/wiremock:z
-              name: backoffice-hostpath0
-      restartPolicy: Always
+      - name: wiremock
+        image: wiremock/wiremock:3.6.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: wiremock-mapping
+          mountPath: /home/wiremock/mappings
       volumes:
-        - hostPath:
-            path: ./
-          name: backoffice-hostpath0
-status: {}
+        - name: wiremock-mapping
+          configMap:
+            name: wiremock-mapping
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert --volumes configMap
-    kompose.version: 1.26.0 (40646f47)
-  creationTimestamp: null
+  name: wiremock-svc
   labels:
-    io.kompose.service: backoffice
-  name: backoffice
+    type: wiremock
 spec:
   ports:
-    - name: "9090"
-      port: 9090
+    - port: 8080
       targetPort: 8080
   selector:
-    io.kompose.service: backoffice
-status:
-  loadBalancer: {}
+    type: wiremock
+  type: LoadBalancer
+---
+apiVersion: v1
+data:
+  catchall.json: "{\r\n   \"name\": \"catchall\",\r\n   \"request\": {\r\n      \"method\":
+    \"GET\",\r\n      \"urlPattern\": \".*\",\r\n      \"basicAuth\": {\r\n         \"username\":
+    \"test\",\r\n         \"password\": \"test\"\r\n     }\r\n   },\r\n   \"response\":
+    {\r\n      \"body\": \"I'm backoffice\",\r\n      \"headers\": {\r\n         \"Content-Type\":
+    \"application/json;charset=UTF-8\"\r\n      },\r\n      \"status\": 200\r\n   }\r\n}\r\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: wiremock-mapping
