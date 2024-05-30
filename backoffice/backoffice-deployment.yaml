@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f docker-compose.yaml --volumes hostPath
+    kompose.cmd: kompose convert --volumes configMap
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -f docker-compose.yaml --volumes hostPath
+        kompose.cmd: kompose convert --volumes configMap
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
@@ -36,11 +36,13 @@ spec:
             - containerPort: 8080
           resources: {}
           volumeMounts:
+            - mountPath: /home/wiremock/__files
+              name: backoffice-data
             - mountPath: /home/wiremock/mappings
-              name: backoffice-mappings
+              name: backoffice-data
       restartPolicy: Always
       volumes:
-        - hostPath:
-            path: ./
-          name: backoffice-mappings
+        - configMap:
+            name: backoffice-data
+          name: backoffice-data
 status: {}
