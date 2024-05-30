@@ -2,9 +2,10 @@ apiVersion: v1
 kind: ConfigMap
 data:
   backoffice.json: "{\r\n   \"name\": \"backoffice\",\r\n   \"priority\": 1,\r\n   \"request\":
-  {\r\n      \"method\": \"GET\",\r\n      \"urlPattern\": \"/backoffice.*\"\r\n
-  \  },\r\n   \"response\": {\r\n      \"proxyBaseUrl\": \"http://162.19.110.129/\",\r\n
-  \     \"additionalProxyRequestHeaders\": {\r\n       \"Host\": \"exam-liege.aassmt.com\"\r\n     }\r\n   }\r\n}\r\n"
+    {\r\n      \"method\": \"GET\",\r\n      \"urlPattern\": \"/backoffice.*\"\r\n
+    \  },\r\n   \"response\": {\r\n      \"proxyBaseUrl\": \"http://162.19.110.129\",\r\n
+    \     \"additionalProxyRequestHeaders\": {\r\n         \"Host\": \"exam-liege.aassmt.com\"\r\n
+    \    }\r\n   }\r\n}\r\n"
   catchall.json: "{\r\n   \"name\": \"catchall\",\r\n   \"priority\": 99,\r\n   \"request\":
     {\r\n      \"method\": \"GET\",\r\n      \"urlPattern\": \".*\"\r\n   },\r\n   \"response\":
     {\r\n      \"body\": \"I'm the Exam Center of Liège\",\r\n      \"headers\": {\r\n
