@@ -36,11 +36,14 @@ spec:
             - containerPort: 8080
           resources: {}
           volumeMounts:
-            - mountPath: /home/wiremock/
-              name: backoffice-cm0
+            - mountPath: /home/wiremock/__files
+              name: wiremock-files
+          volumeMounts:
+            - mountPath: /home/wiremock/mappings
+              name: wiremock-mappings
       restartPolicy: Always
       volumes:
         - configMap:
             name: backoffice-cm0
-          name: backoffice-cm0
+          name: wiremock-mappings
 status: {}
