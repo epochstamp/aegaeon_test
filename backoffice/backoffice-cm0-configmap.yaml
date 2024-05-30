@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 data:
-  __files:
-  mappings:
+  __files/:
+  mappings/:
   catchall.json: "{\r\n   \"name\": \"catchall\",\r\n   \"request\": {\r\n      \"method\":
     \"GET\",\r\n      \"urlPattern\": \".*\",\r\n      \"basicAuth\": {\r\n         \"username\":
     \"test\",\r\n         \"password\": \"test\"\r\n     }\r\n   },\r\n   \"response\":
