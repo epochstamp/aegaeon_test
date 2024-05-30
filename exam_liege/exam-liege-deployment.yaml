@@ -43,7 +43,7 @@ spec:
               name: wiremock-mappings
       restartPolicy: Always
       volumes:
-        - name: exam-liege-cm0
+        - name: wiremock-mappings
           configMap:
             name: exam-liege-cm0
 status: {}
