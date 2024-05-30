@@ -24,15 +24,15 @@ spec:
         - name: wiremock-mapping
           mountPath: /home/wiremock/mappings
       volumes:
-        - name: wiremock-mapping
+        - name: backoffice-mapping
           configMap:
-            name: wiremock-mapping
+            name: backoffice-mapping
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: wiremock-svc
+  name: backoffice
   labels:
     type: wiremock
 spec:
@@ -53,4 +53,4 @@ data:
 kind: ConfigMap
 metadata:
   creationTimestamp: null
-  name: wiremock-mapping
+  name: backoffice-mapping
