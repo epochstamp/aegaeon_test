@@ -41,6 +41,6 @@ spec:
       restartPolicy: Always
       volumes:
         - hostPath:
-            path: ./
+            path: ./mappings
           name: backoffice-hostpath0
 status: {}
