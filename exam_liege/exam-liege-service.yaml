@@ -7,7 +7,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: exam-liege
-  name: exam_liege
+  name: exam-liege
 spec:
   ports:
     - name: "9091"
