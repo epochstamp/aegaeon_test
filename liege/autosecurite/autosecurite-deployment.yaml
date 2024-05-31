@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-autosecurite-center.yaml --volumes configMap
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: autosecurite
+  name: autosecurite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: autosecurite
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-autosecurite-center.yaml --volumes configMap
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: autosecurite
+    spec:
+      containers:
+        - args:
+            - --verbose
+            - --global-response-templating
+            - --max-template-cache-entries
+            - "0"
+          image: wiremock/wiremock:3.5.4
+          name: autosecurite
+          ports:
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - mountPath: /home/wiremock/__files
+              name: wiremock-files
+          volumeMounts:
+            - mountPath: /home/wiremock/mappings
+              name: wiremock-mappings
+      restartPolicy: Always
+      volumes:
+        - name: wiremock-mappings
+          configMap:
+            name: autosecurite-cm0
+status: {}
