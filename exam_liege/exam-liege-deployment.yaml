@@ -30,7 +30,7 @@ spec:
             - --global-response-templating
             - --max-template-cache-entries
             - "0"
-          image: wiremock/wiremock:3.6.0
+          image: wiremock/wiremock:3.5.4
           name: exam-liege
           ports:
             - containerPort: 8080
