@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
-    io.kompose.service: exam-center
+    io.kompose.service: exam-liege-center
   name: exam-center
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: exam-center
+      io.kompose.service: exam-liege-center
   strategy:
     type: Recreate
   template:
@@ -45,5 +45,5 @@ spec:
       volumes:
         - name: wiremock-mappings
           configMap:
-            name: exam-center-cm0
+            name: exam-center-liege-cm0
 status: {}
