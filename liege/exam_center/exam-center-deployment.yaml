@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
-    io.kompose.service: exam-liege
-  name: exam-liege
+    io.kompose.service: exam-center
+  name: exam-center
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: exam-liege
+      io.kompose.service: exam-center
   strategy:
     type: Recreate
   template:
@@ -22,7 +22,7 @@ spec:
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
-        io.kompose.service: exam-liege
+        io.kompose.service: exam-center
     spec:
       containers:
         - args:
@@ -31,7 +31,7 @@ spec:
             - --max-template-cache-entries
             - "0"
           image: wiremock/wiremock:3.5.4
-          name: exam-liege
+          name: exam-center
           ports:
             - containerPort: 8080
           resources: {}
@@ -45,5 +45,5 @@ spec:
       volumes:
         - name: wiremock-mappings
           configMap:
-            name: exam-liege-cm0
+            name: exam-center-cm0
 status: {}
